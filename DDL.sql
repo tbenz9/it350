@@ -15,6 +15,20 @@
 --
 -- ================================================
 
+-- Drop all tables
+DROP TABLE employees;
+DROP TABLE computers;
+DROP TABLE macaddresses;
+DROP TABLE harddrives;
+DROP TABLE licenses;
+DROP TABLE switches;
+DROP TABLE ports;
+DROP TABLE warranties;
+DROP TABLE monitors;
+DROP TABLE devices;
+DROP TABLE phones
+DROP TABLE reviews;
+
 -- Create the employees Table
 CREATE TABLE employees
 (
