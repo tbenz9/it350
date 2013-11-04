@@ -19,6 +19,9 @@
 CREATE TABLE employees
 (
 	employees_ID VARCHAR(10) PRIMARY KEY NOT NULL,
+	employee_firstname VARCHAR(20),
+	employee_lastname VARCHAR(20),
+	email VARCHAR(40),
 	title VARCHAR(100),
 	manager VARCHAR(10),
 	office_number VARCHAR(30),
@@ -30,6 +33,7 @@ CREATE TABLE employees
 CREATE TABLE computers
 (
 	computers_ID VARCHAR(10) PRIMARY KEY NOT NULL,
+	hostname VARCHAR(64),
 	operating_system VARCHAR(30),
 	motherboard VARCHAR(30),
 	ram VARCHAR(30),
