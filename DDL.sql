@@ -155,3 +155,5 @@ CREATE TABLE reviews
 	review_date DATE,
 	rating INTEGER
 );
+
+source dummyData.sql
