@@ -26,7 +26,7 @@ DROP TABLE ports;
 DROP TABLE warranties;
 DROP TABLE monitors;
 DROP TABLE devices;
-DROP TABLE phones
+DROP TABLE phones;
 DROP TABLE reviews;
 
 -- Create the employees Table
