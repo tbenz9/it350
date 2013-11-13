@@ -1,29 +1,9 @@
 #!/usr/bin/perl
 
-#BEGIN
-#{
-#  unless (eval "use DBI; 1")
-#  {
-#    print "Missing DBI. Installing...\n";
-$version=`cat /etc/issue.net`;
-if ( $version =~ /Ubuntu/ ) {
-    print `apt-get install libdbd-mysql-perl`;
-}
-else
-{
-    print `yum -y install perl-DBI perl-DBD-MySQL 2>&1`;
-}
-    die "Can't load DBI: $@" unless eval "use DBI; 1";
-#  }
-#}
+use DBI;
+use MongoDB;
 
-@months = qw(Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec);
-@weekDays = qw(Sun Mon Tue Wed Thu Fri Sat Sun);
-($second, $minute, $hour, $dayOfMonth, $month, $yearOffset, $dayOfWeek, $dayOfYear, $daylightSavings) = localtime();
- $year = 1900 + $yearOffset;
- $theTime = "$weekDays[$dayOfWeek] $months[$month] $dayOfMonth $year, $hour:$minute:$second";
-
-# CONFIG VARIABLES
+# MYSQL CONFIG VARIABLES
 $platform = "mysql";
 $database = "it350";
 $host = "localhost";
@@ -32,7 +12,14 @@ $tablename = "computers";
 $user = "root";
 $pw = "cookies123";
 
-# DATA SOURCE NAME
+# MONGO CONFIG VARIABLES
+my $mongoHost = "localhost";
+my $mongoPort = 27017;
+my $mongoConnection = MongoDB::Connection->new ("host" => "$mongoHost", "port" => $mongoPort );
+my $db = $mongoConnection->it350;
+my $computer_info = $db->computers;
+
+# MYSQL DATA SOURCE NAME
 $dsn = "DBI:$platform:$database:$host:$port";
 
 #RAM Info
@@ -85,3 +72,8 @@ $query_handle = $connect->prepare($query);
 
 # EXECUTE THE QUERY
 $query_handle->execute();
+
+$computer_info->insert({'hostname' => $Name,
+			'ram' => $RAM,
+			'operatingSystem' => $OS,
+			'cpu' => $CPU, } );
